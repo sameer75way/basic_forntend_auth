@@ -1,0 +1,17 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "strict": true,
+  "noImplicitAny": true,
+  "strictNullChecks": true,
+  "noUncheckedIndexedAccess": true,
+  "compilerOptions": {
+    "baseUrl": "./src",
+"paths": {
+  "@/*": ["*"]
+}
+  }
+}
