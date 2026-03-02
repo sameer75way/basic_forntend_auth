@@ -1,10 +1,17 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { ProtectedRoute } from './ProtectedRoute'
 import { PublicOnlyRoute } from './PublicOnlyRoute'
 import { LandingPage } from '@/pages/LandingPage'
 import { LoginPage } from '@/pages/LoginPage'
 import { SignupPage } from '@/pages/SignupPage'
 import { HomePage } from '@/pages/HomePage'
+import { useAppSelector } from '@/app/hooks'
+import type { RootState } from '@/app/store'
+
+const DefaultRedirect = (): React.JSX.Element => {
+  const { isAuthenticated } = useAppSelector((state: RootState) => state.auth)
+  return <Navigate to={isAuthenticated ? '/home' : '/'} replace />
+}
 
 export const router = createBrowserRouter([
   {
@@ -20,5 +27,9 @@ export const router = createBrowserRouter([
     children: [
       { path: '/home', element: <HomePage /> },
     ],
+  },
+  {
+    path: '*',
+    element: <DefaultRedirect />,
   },
 ])
